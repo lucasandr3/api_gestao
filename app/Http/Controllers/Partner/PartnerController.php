@@ -17,4 +17,24 @@ class PartnerController extends Controller
     {
         return $this->interactor->createPartner(new PartnerInputRequest($request->all()));
     }
+
+    public function partnerById(string $document)
+    {
+        return $this->interactor->getParnter(new PartnerInputRequest(['document' => $document]));
+    }
+
+    public function allPartners()
+    {
+        return $this->interactor->partners();
+    }
+
+    public function unauthorizePartner(string $document)
+    {
+        return $this->interactor->unauthorize(new PartnerInputRequest(['document' => $document]));
+    }
+
+    public function authorizePartner(string $document)
+    {
+        return $this->interactor->authorize(new PartnerInputRequest(['document' => $document]));
+    }
 }

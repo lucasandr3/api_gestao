@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('token');
             $table->boolean('homologated')->default(false);
             $table->dateTime('date_homologated')->nullable();
+            $table->boolean('authorized')->default(1);
             $table->timestamps();
         });
     }

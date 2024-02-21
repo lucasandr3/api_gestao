@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Domain\UseCases\Partner\PartnerEntityInterface;
+use App\Models\Auth\TokenPartner;
 use DateTime;
 use Illuminate\Support\Fluent;
 
@@ -65,5 +66,15 @@ class PartnerEntity implements PartnerEntityInterface
         ];
 
         return new Fluent(array_filter($partner));
+    }
+
+    public function getPartnerNotify(): Fluent
+    {
+        return new Fluent([
+            'name' => $this->getName(),
+            'document' => $this->getDocument(),
+            'created_at' => now(),
+            'model' => new TokenPartner()
+        ]);
     }
 }

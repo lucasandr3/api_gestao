@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Domain\UseCases\Partner;
+namespace App\Domain\UseCases\TokenCompany;
 
-use App\Factories\Partner\PartnerFactory;
-use App\Services\SlackNotificationService;
+use App\Factories\TokenCompany\TokenCompanyFactory;
 
-class PartnerInteractor
+class TokenCompanyInteractor
 {
     public function __construct(
-        private readonly PartnerRepositoryInterface $repository,
-        private readonly PartnerFactory $factory,
-        private readonly PartnerOutputInterface $output,
-        private readonly SlackNotificationService $slackNotification
+        private readonly TokenCompanyRepositoryInterface $repository,
+        private readonly TokenCompanyFactory $factory,
+        private readonly TokenCompanyOutputInterface $output
     )
     {}
 
-    public function createPartner(PartnerInputRequest $input)
+    public function generateToken(TokenCOmpanyInputRequest $input)
     {
+        echo "<pre>"; var_dump($input->getDocument()); echo "</pre>"; die;
         $partner = $this->repository->getPartner($input->getDocument());
 
         if ($partner !== null) {
@@ -34,7 +33,6 @@ class PartnerInteractor
             return $this->output->unableCreate();
         }
 
-        $this->slackNotification->newCustomer($data->getPartnerNotify());
         return $this->output->partner($result);
     }
 

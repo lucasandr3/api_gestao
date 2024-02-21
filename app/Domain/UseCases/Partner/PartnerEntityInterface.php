@@ -24,4 +24,6 @@ interface PartnerEntityInterface
     public function getUpdatedAt(): null|DateTime;
 
     public function getPartner(): Fluent;
+
+    public function getPartnerNotify(): Fluent;
 }
