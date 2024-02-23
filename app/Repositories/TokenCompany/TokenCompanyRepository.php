@@ -3,6 +3,7 @@
 namespace App\Repositories\TokenCompany;
 
 use App\Domain\UseCases\TokenCompany\TokenCompanyRepositoryInterface;
+use App\Models\Auth\TokenCompany;
 use App\Models\Auth\TokenPartner;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -14,8 +15,8 @@ class TokenCompanyRepository implements TokenCompanyRepositoryInterface
         return TokenPartner::query()->where('document', '=', $document)->first();
     }
 
-    public function generateToken(): Collection
+    public function generateToken($data)
     {
-        return TokenPartner::all();
+        return TokenCompany::query()->create($data);
     }
 }

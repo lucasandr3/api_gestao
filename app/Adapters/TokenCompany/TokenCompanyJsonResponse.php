@@ -39,4 +39,9 @@ class TokenCompanyJsonResponse implements TokenCompanyOutputInterface
     {
         return response()->json(['message' => 'Parceiro não encontrado, verifique o documento informado.'], 404);
     }
+
+    public function partnerNotFound(): JsonResponse
+    {
+        return response()->json(['message' => 'Parceiro não encontrado ou não está mais habilitado.']);
+    }
 }

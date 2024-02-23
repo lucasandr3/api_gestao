@@ -17,4 +17,6 @@ interface TokenCompanyOutputInterface
     public function success(): JsonResponse;
 
     public function notFound(): JsonResponse;
+
+    public function partnerNotFound();
 }

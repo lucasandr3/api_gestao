@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Auth\TokenPartner;
-use App\Models\Settings\Preference;
 use App\Models\Settings\Settings;
 use App\Notifications\Partner\RegisterPartnerNotification;
 use Illuminate\Notifications\Slack\BlockKit\Blocks\ActionsBlock;

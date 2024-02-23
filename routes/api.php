@@ -34,7 +34,7 @@ Route::prefix('partner')->controller(PartnerController::class)->group(function (
 });
 
 Route::prefix('token-company')->controller(TokenCompanyController::class)->group(function () {
-    Route::post('{document}', 'generateToken');
+    Route::post('', 'generateToken');
 });
 
 Route::prefix('customer')->controller(CustomerController::class)->group(function () {

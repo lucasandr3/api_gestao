@@ -3,37 +3,37 @@
 namespace App\Domain\UseCases\TokenCompany;
 
 use App\Factories\TokenCompany\TokenCompanyFactory;
+use App\Repositories\Partner\PartnerRepository;
 
 class TokenCompanyInteractor
 {
     public function __construct(
         private readonly TokenCompanyRepositoryInterface $repository,
         private readonly TokenCompanyFactory $factory,
-        private readonly TokenCompanyOutputInterface $output
+        private readonly TokenCompanyOutputInterface $output,
+        private readonly PartnerRepository $partnerRepository
     )
     {}
 
     public function generateToken(TokenCOmpanyInputRequest $input)
     {
-        echo "<pre>"; var_dump($input->getDocument()); echo "</pre>"; die;
-        $partner = $this->repository->getPartner($input->getDocument());
+        $partner = $this->partnerRepository->getPartner($input->getDocument());
 
-        if ($partner !== null) {
-            return $this->output->partner($partner);
+        if ($partner === null) {
+            return $this->output->partnerNotFound();
         }
 
-        $data = $this->factory->make([
-            'name' => $input->getName(),
-            'document' => $input->getDocument()
-        ]);
+        $tokenCompany = $this->repository->getTokenCompany($input->getDocument());
 
-        $result = $this->repository->create($data->getPartner()->toArray());
+        $data = $this->factory->make($partner->toArray());
+
+        $result = $this->repository->generateToken($data->getTokenData());
 
         if (!$result) {
             return $this->output->unableCreate();
         }
 
-        return $this->output->partner($result);
+        return $this->output->tokenCompany($result);
     }
 
     public function partners()

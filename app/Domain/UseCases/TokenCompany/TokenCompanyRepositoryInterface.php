@@ -6,5 +6,5 @@ interface TokenCompanyRepositoryInterface
 {
     public function getTokenCompany(string $document): null|object;
 
-    public function generateToken();
+    public function generateToken($data);
 }
